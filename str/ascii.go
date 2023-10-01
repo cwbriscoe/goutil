@@ -1,3 +1,4 @@
+// Copyright 2023 Christopher Briscoe.  All rights reserved.
 package str
 
 // ToASCII will return a string that is stripped of non ASCII readable characters.
