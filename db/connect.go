@@ -18,7 +18,7 @@ type PgConnInfo struct {
 }
 
 // GetPgPool connects to a postgres db and returns a pool of connections
-func GetPgPool(info *PgConnInfo) (*pgxpool.Pool, error) {
+func GetPgPool(info PgConnInfo) (*pgxpool.Pool, error) {
 	str := "postgresql://" +
 		info.Host + ":" +
 		info.Port + "/" +
@@ -30,7 +30,7 @@ func GetPgPool(info *PgConnInfo) (*pgxpool.Pool, error) {
 }
 
 // GetPgConn connects to a postgres db and returns a connection
-func GetPgConn(info *PgConnInfo) (*pgx.Conn, error) {
+func GetPgConn(info PgConnInfo) (*pgx.Conn, error) {
 	str := "postgresql://" +
 		info.Host + ":" +
 		info.Port + "/" +
