@@ -3,6 +3,7 @@ package compress
 
 import (
 	"bytes"
+	"errors"
 	"io"
 	"sync"
 
@@ -28,7 +29,11 @@ func NewBrotliPool(level int) *BrotliPool {
 
 // Compress compresses the supplied []bytes
 func (p *BrotliPool) Compress(src []byte) ([]byte, error) {
-	w := p.pool.Get().(*brotli.Writer)
+	val := p.pool.Get()
+	w, ok := val.(*brotli.Writer)
+	if !ok {
+		return nil, errors.New("invalid type returned from brotli pool")
+	}
 	defer p.pool.Put(w)
 
 	dest := &bytes.Buffer{}

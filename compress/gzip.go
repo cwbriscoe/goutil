@@ -3,6 +3,7 @@ package compress
 
 import (
 	"bytes"
+	"errors"
 	"io"
 	"sync"
 
@@ -28,7 +29,11 @@ func NewGzipPool(level int) *GzipPool {
 
 // Compress compresses the supplied []bytes
 func (p *GzipPool) Compress(src []byte) ([]byte, error) {
-	w := p.pool.Get().(*gzip.Writer)
+	val := p.pool.Get()
+	w, ok := val.(*gzip.Writer)
+	if !ok {
+		return nil, errors.New("invalid type returned from gzip pool")
+	}
 	defer p.pool.Put(w)
 
 	dest := &bytes.Buffer{}
