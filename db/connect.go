@@ -17,8 +17,8 @@ type Config struct {
 	Pass string `json:"pass"`
 }
 
-// GetPgPool connects to a postgres db and returns a pool of connections
-func GetPgPool(cfg *Config) (*pgxpool.Pool, error) {
+// NewPgPool connects to a postgres db and returns a pool of connections
+func NewPgPool(cfg *Config) (*pgxpool.Pool, error) {
 	str := "postgresql://" +
 		cfg.Host + ":" +
 		cfg.Port + "/" +
@@ -30,7 +30,7 @@ func GetPgPool(cfg *Config) (*pgxpool.Pool, error) {
 }
 
 // GetPgConn connects to a postgres db and returns a connection
-func GetPgConn(cfg *Config) (*pgx.Conn, error) {
+func NewPgConn(cfg *Config) (*pgx.Conn, error) {
 	str := "postgresql://" +
 		cfg.Host + ":" +
 		cfg.Port + "/" +
