@@ -21,13 +21,13 @@ type Logger struct {
 
 // Config stores the information required to start a new logger
 type Config struct {
-	BaseDir    string
-	FileName   string
-	MaxAge     time.Duration
-	MaxSize    int64
-	MaxBackups int
-	Console    bool
-	Compress   bool
+	BaseDir    string        `json:"basedir"`
+	FileName   string        `json:"filename"`
+	MaxAge     time.Duration `json:"maxage"`
+	MaxSize    int64         `json:"maxsize"`
+	MaxBackups int           `json:"maxbackups"`
+	Console    bool          `json:"console"`
+	Compress   bool          `json:"compress"`
 }
 
 // NewLogger returns a new rolling logger based on the config parameters used
