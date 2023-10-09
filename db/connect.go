@@ -8,8 +8,8 @@ import (
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
-// PgConnInfo stores postgres database connection info
-type PgConnInfo struct {
+// Config stores postgres database connection info
+type Config struct {
 	Host string `json:"host"`
 	Port string `json:"port"`
 	Name string `json:"name"`
@@ -18,25 +18,25 @@ type PgConnInfo struct {
 }
 
 // GetPgPool connects to a postgres db and returns a pool of connections
-func GetPgPool(info *PgConnInfo) (*pgxpool.Pool, error) {
+func GetPgPool(cfg *Config) (*pgxpool.Pool, error) {
 	str := "postgresql://" +
-		info.Host + ":" +
-		info.Port + "/" +
-		info.Name + "?user=" +
-		info.User + "&password=" +
-		info.Pass
+		cfg.Host + ":" +
+		cfg.Port + "/" +
+		cfg.Name + "?user=" +
+		cfg.User + "&password=" +
+		cfg.Pass
 	pool, err := pgxpool.New(context.Background(), str)
 	return pool, err
 }
 
 // GetPgConn connects to a postgres db and returns a connection
-func GetPgConn(info *PgConnInfo) (*pgx.Conn, error) {
+func GetPgConn(cfg *Config) (*pgx.Conn, error) {
 	str := "postgresql://" +
-		info.Host + ":" +
-		info.Port + "/" +
-		info.Name + "?user=" +
-		info.User + "&password=" +
-		info.Pass
+		cfg.Host + ":" +
+		cfg.Port + "/" +
+		cfg.Name + "?user=" +
+		cfg.User + "&password=" +
+		cfg.Pass
 	conn, err := pgx.Connect(context.Background(), str)
 	return conn, err
 }

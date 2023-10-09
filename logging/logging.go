@@ -31,19 +31,19 @@ type Config struct {
 }
 
 // NewLogger returns a new rolling logger based on the config parameters used
-func NewLogger(config Config) (*Logger, error) {
+func NewLogger(cfg *Config) (*Logger, error) {
 	var writers []io.Writer
 
-	if config.Console {
+	if cfg.Console {
 		writers = append(writers, zerolog.ConsoleWriter{Out: os.Stderr})
 	}
 
-	filename := path.Join(config.BaseDir, config.FileName)
+	filename := path.Join(cfg.BaseDir, cfg.FileName)
 
-	roller, err := lumberjack.NewRoller(filename, config.MaxSize, &lumberjack.Options{
-		MaxAge:     config.MaxAge,
-		MaxBackups: config.MaxBackups,
-		Compress:   config.Compress,
+	roller, err := lumberjack.NewRoller(filename, cfg.MaxSize, &lumberjack.Options{
+		MaxAge:     cfg.MaxAge,
+		MaxBackups: cfg.MaxBackups,
+		Compress:   cfg.Compress,
 	})
 	if err != nil {
 		return nil, err
