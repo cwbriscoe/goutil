@@ -23,3 +23,20 @@ func ParseInt64(num string) (int64, error) {
 func ParseUint64(num string) (uint64, error) {
 	return strconv.ParseUint(num, 10, 64)
 }
+
+// ParseInt is a convenience function to parse a string into an int
+func ParseInt(num string) (int, error) {
+	val, err := strconv.ParseInt(num, 10, 64)
+	return int(val), err
+}
+
+// ParseUint is a convenience function to parse a string into an uint
+func ParseUint(num string) (uint, error) {
+	val, err := strconv.ParseUint(num, 10, 64)
+	return uint(val), err
+}
+
+// ParseBool is a convenience function to parse a string into a bool
+func ParseBool(val string) (bool, error) {
+	return strconv.ParseBool(val)
+}
