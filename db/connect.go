@@ -29,7 +29,7 @@ func NewPgPool(cfg *Config) (*pgxpool.Pool, error) {
 	return pool, err
 }
 
-// GetPgConn connects to a postgres db and returns a connection
+// NewPgConn connects to a postgres db and returns a connection
 func NewPgConn(cfg *Config) (*pgx.Conn, error) {
 	str := "postgresql://" +
 		cfg.Host + ":" +
