@@ -19,6 +19,15 @@ type Logger struct {
 	roller *lumberjack.Roller
 }
 
+// Nop is a no-operation logger instance with no roller attached
+var (
+	nop = zerolog.Nop()
+	Nop = &Logger{
+		Logger: &nop,
+		roller: nil,
+	}
+)
+
 // Config stores the information required to start a new logger
 type Config struct {
 	BaseDir    string        `json:"basedir"`
